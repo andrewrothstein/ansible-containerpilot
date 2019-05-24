@@ -1,0 +1,8 @@
+---
+# vars file for container-pilot
+containerpilot_name: containerpilot-{{ containerpilot_ver }}
+containerpilot_tgz: '{{ containerpilot_name }}.tar.gz'
+containerpilot_tmp: /tmp/{{ containerpilot_tgz }}
+containerpilot_url: '{{ containerpilot_mirror }}/{{ containerpilot_ver }}/{{ containerpilot_tgz }}'
+containerpilot_checksum: '{{ containerpilot_checksums[containerpilot_ver] }}'
+containerpilot_install_dir: '{{ containerpilot_parent_install_dir }}/{{ containerpilot_name }}'

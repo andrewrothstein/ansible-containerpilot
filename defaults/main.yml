@@ -1,0 +1,8 @@
+---
+# defaults file for container-pilot
+containerpilot_ver: 3.8.0
+containerpilot_mirror: https://github.com/joyent/containerpilot/releases/download
+containerpilot_checksums:
+  # https://github.com/joyent/containerpilot/releases/download/3.8.0/containerpilot-3.8.0.sha1.txt
+  '3.8.0': sha1:84642c13683ddae6ccb63386e6160e8cb2439c26
+containerpilot_parent_install_dir: /usr/local/bin

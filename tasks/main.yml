@@ -1,0 +1,46 @@
+---
+- name: check for container-pilot install
+  become: yes
+  stat:
+    path: '{{ containerpilot_install_dir }}'
+  changed_when: false
+  register: containerpilot_bin
+- when: not containerpilot_bin.stat.exists
+  block:
+    - name: create install dir...
+      become: yes
+      become_user: root
+      file:
+        path: '{{ containerpilot_install_dir }}'
+        state: directory
+        mode: 0755
+    - name: download container pilot
+      become: yes
+      become_user: root
+      get_url:
+        url: '{{ containerpilot_url }}'
+        dest: '{{ containerpilot_tmp }}'
+        checksum: '{{ containerpilot_checksum }}'
+        mode: 0644
+    - name: unarchive
+      become: yes
+      become_user: root
+      unarchive:
+        remote_src: yes
+        src: '{{ containerpilot_tmp }}'
+        dest: '{{ containerpilot_install_dir }}'
+        creates: '{{ containerpilot_install_dir }}/containerpilot'
+  always:
+    - name: delete tgz
+      become: yes
+      become_user: root
+      file:
+        path: '{{ containerpilot_tmp }}'
+        state: absent
+- name: link
+  become: yes
+  become_user: root
+  file:
+    src: '{{ containerpilot_install_dir }}/containerpilot'
+    dest: '{{ containerpilot_parent_install_dir}}/containerpilot'
+    state: link
