@@ -42,5 +42,5 @@
   become_user: root
   file:
     src: '{{ containerpilot_install_dir }}/containerpilot'
-    dest: '{{ containerpilot_parent_install_dir}}/containerpilot'
+    dest: '{{ containerpilot_parent_install_dir }}/containerpilot'
     state: link
